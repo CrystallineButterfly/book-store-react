@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import AddBooks from './components/AddBooks';
-import Authors from './components/Authors';
 import RemoveBook from './components/RemoveBook';
+import Catergories from './components/Catergories';
+import DisplayBooks from './components/DisplayBooks';
 
 function BookStore() {
   return (
@@ -13,13 +14,13 @@ function BookStore() {
           <Link to="/books">Books</Link>
         </li>
         <li>
-          <Link to="/authors">Authors</Link>
+          <Link to="/catergories">Catergories</Link>
         </li>
       </ul>
       <hr />
       <Routes>
-        <Route exact path="/books" component={AddBooks} />
-        <Route path="/authors" component={Authors} />
+        <Route exact path="/books" element={<DisplayBooks />} />
+        <Route path="/catergories" element={<Catergories />} />
       </Routes>
       <AddBooks />
       <RemoveBook />

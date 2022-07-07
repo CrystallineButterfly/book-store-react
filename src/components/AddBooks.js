@@ -5,12 +5,6 @@ function AddBooks() {
   return (
     <div>
       <h2>Add a New Book</h2>
-      <ul>
-        <li />
-        <li />
-        <li />
-        <li />
-      </ul>
       Title
       <input type="text" property="title" />
       Author
