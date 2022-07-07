@@ -14,8 +14,7 @@
     },
     "extends": [
         "airbnb",
-        "plugin:react/recommended",
-        "airbnb-typescript"
+        "plugin:react/recommended"
     ],
     "plugins": [
         "react"

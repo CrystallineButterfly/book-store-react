@@ -1,6 +1,6 @@
 import React from 'react';
-import AddBooks from "./components/AddBooks";
-import RemoveBook from "./components/RemoveBook";
+import AddBooks from './AddBooks';
+import RemoveBook from './RemoveBook';
 
 export default function DisplayBooks() {
   return (
