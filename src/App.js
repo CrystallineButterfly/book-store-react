@@ -1,7 +1,5 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import AddBooks from './components/AddBooks';
-import RemoveBook from './components/RemoveBook';
 import Catergories from './components/Catergories';
 import DisplayBooks from './components/DisplayBooks';
 
@@ -22,8 +20,6 @@ function BookStore() {
         <Route exact path="/books" element={<DisplayBooks />} />
         <Route path="/catergories" element={<Catergories />} />
       </Routes>
-      <AddBooks />
-      <RemoveBook />
     </div>
   );
 }
