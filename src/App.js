@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Catergories from './components/Catergories';
+import Catergories from './redux/catergories/Catergories';
 import DisplayBooks from './components/DisplayBooks';
 
 function BookStore() {
