@@ -1,27 +1,49 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Catergories from './redux/catergories/Catergories';
-import DisplayBooks from './components/DisplayBooks';
+// import React from 'react';
+// import { Routes, Route, Link } from 'react-router-dom';
+// import { Provider } from 'react-redux';
+// import Books from 'Books';
+// import configureStore from './redux/configureStore';
+// import Catergories from './redux/catergories/Catergories';
 
-function BookStore() {
+// function BookStore() {
+//   return (
+//     <Provider store={configureStore}>
+//       <div>
+//         <h1>Book Store</h1>
+//         <ul>
+//           <li>
+//             <Link to="/books">Books</Link>
+//           </li>
+//           <li>
+//             <Link to="/catergories">Catergories</Link>
+//           </li>
+//         </ul>
+//         <hr />
+//         <Routes>
+//           <Route exact path="/books" element={<Books />} />
+//           <Route path="/catergories" element={<Catergories />} />
+//         </Routes>
+//       </div>
+//     </Provider>
+//   );
+// }
+
+// export default BookStore;
+
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/NavBar';
+import Books from './components/books/Books';
+import Catergories from './redux/catergories/Catergories';
+
+function App() {
   return (
-    <div>
-      <h1>Book Store</h1>
-      <ul>
-        <li>
-          <Link to="/books">Books</Link>
-        </li>
-        <li>
-          <Link to="/catergories">Catergories</Link>
-        </li>
-      </ul>
-      <hr />
+    <>
+      <Navbar />
       <Routes>
-        <Route exact path="/books" element={<DisplayBooks />} />
-        <Route path="/catergories" element={<Catergories />} />
+        <Route exact path="/" element={<Books />} />
+        <Route path="/categories" element={<Catergories />} />
       </Routes>
-    </div>
+    </>
   );
 }
-
-export default BookStore;
+export default App;
