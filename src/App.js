@@ -31,7 +31,7 @@
 // export default BookStore;
 
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/NavBar';
+import Navbar from './components/Navbar';
 import Books from './components/books/Books';
 import Catergories from './redux/catergories/Catergories';
 
