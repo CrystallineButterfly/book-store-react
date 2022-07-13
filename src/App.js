@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import Book from './Components/Book';
 import store from './Redux/configureStore';
 import Navbar from './Components/Navbar';
-import Catagories from './Components/Catergories';
+import Catergories from './Components/Catergories';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<Book />} />
-          <Route path="/catagories" element={<Catagories />} />
+          <Route path="/catergories" element={<Catergories />} />
         </Routes>
       </Provider>
     </Router>
