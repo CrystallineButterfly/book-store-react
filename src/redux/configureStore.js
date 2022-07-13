@@ -5,12 +5,12 @@ import { combineReducers } from 'redux';
 import booksReducer from './Books/Books';
 import catergoriesReducer from './Catergories/Catergories';
 
-const allReducer = combineReducers({
+const reducer = combineReducers({
   books: booksReducer,
   catergories: catergoriesReducer,
 });
 
-const store = configureStore(allReducer, /* preloadedState, */
+const store = configureStore({ reducer }, /* preloadedState, */
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default store;
