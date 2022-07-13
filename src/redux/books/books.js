@@ -1,54 +1,38 @@
-const ADD = 'bookstore/books/ADD';
-const REMOVE = 'bookstore/books/REMOVE';
+// Actions
+const ADD_BOOK = 'bookstore-react/booksReducer/ADD_BOOK';
+const REMOVE_BOOK = 'bookstore-react/booksReducer/REMOVE_BOOK';
 
-const initState = [
-  {
-    id: 1,
-    title: 'TestTitle',
-    author: 'TestAuthor',
-  },
-  {
-    id: 2,
-    title: 'TestTitlePart2',
-    author: 'TestAuthorPart2',
-  },
-];
-
-const booksReducer = (state = initState, action) => {
-  let nextId = 0;
-  if (state.length - 1 < 0) {
-    nextId = 0;
-  } else {
-    nextId = state[state.length - 1].id;
-  }
-  nextId += 1;
-
+// Reducer
+export default function booksReducer(
+  state = [
+    {
+      id: 1,
+      title: 'test1',
+      author: 'test1',
+    },
+    {
+      id: 2,
+      title: 'test2',
+      author: 'test2',
+    },
+  ],
+  action = {},
+) {
   switch (action.type) {
-    case ADD:
-      return [
-        ...state,
-        {
-          id: nextId,
-          title: action.title,
-          author: action.author,
-        },
-      ];
-    case REMOVE:
-      return state.filter((book) => book.id !== action.id);
+    case ADD_BOOK:
+      return state.push(action.data);
+    case REMOVE_BOOK:
+      return state.filter((book) => book.id !== action.data);
     default:
       return state;
   }
-};
+}
 
-export const addAction = (title, author) => ({
-  type: ADD,
-  title,
-  author,
-});
+// Action Creators
+export function addBook(book) {
+  return { type: ADD_BOOK, data: book };
+}
 
-export const removeAction = (id) => ({
-  type: REMOVE,
-  id,
-});
-
-export default booksReducer;
+export function removeBook(bookID) {
+  return { type: REMOVE_BOOK, data: bookID };
+}

@@ -1,7 +1,16 @@
-import React from 'react';
+// Actions
+const CHECK_STATUS = 'bookstore-react/categoriesReducer/CHECK_STATUS';
 
-export default function Catergories() {
-  return (
-    <button type="submit">Check Status</button>
-  );
+// Reducer
+export default function catergoriesReducer(state = [], action = {}) {
+  switch (action.type) {
+    case CHECK_STATUS:
+      return 'Under Construction';
+    default: return state;
+  }
+}
+
+// Action Creators
+export function checkStatus() {
+  return { type: CHECK_STATUS };
 }
