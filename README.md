@@ -13,6 +13,13 @@
 
 ## Live Demo (not available)
 
+## Set up- 
+
+RUN- npm run build
+Then use- npm start (to see)
+
+
+
 ## Authors
 
 👤 **Author1**
