@@ -1,82 +1,66 @@
-const ADD = 'bookstore/book/ADD';
-const REMOVE = 'bookstore/book/REMOVE';
-const GET_BOOK_FROM_API = 'bookstore/book/GET_BOOK_FROM_API';
+const REMOVE = 'bookstore/books/REMOVE';
+const GET_BOOKS = 'bookStore/books/GET_BOOKS';
+const SAVE_BOOK = 'bookStore/books/SAVE_BOOK';
+const initialState = [];
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/rSWOuh8Pfu8EVUz1p7ix/books';
 
-export const addBook = async (book) => {
-  const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/YtVxNHXODMWZgorpP7tK/books/';
-
-  const myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-
-  const raw = JSON.stringify({
-    item_id: book.id,
-    title: book.title,
-    author: book.author,
-    category: 'Fiction',
-  });
-
-  const requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow',
-  };
-
-  const response = await fetch(url, requestOptions);
-  const result = await response.text();
-
-  if (result === 'Created') return { type: ADD, payload: book };
-
-  return { type: 'DO_NOT_ADD', payload: book };
-};
-
-export const removeBook = async (id) => {
-  const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/YtVxNHXODMWZgorpP7tK/books/';
-  const newUrl = url.concat(id);
-
-  const myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-
-  const requestOptions = {
-    method: 'DELETE',
-    headers: myHeaders,
-    redirect: 'follow',
-  };
-
-  const response = await fetch(newUrl, requestOptions);
-  const result = await response.text();
-
-  if (result === 'The book was deleted successfully!') return { type: REMOVE, payload: id };
-
-  return { type: 'DO_NOT_REMOVE', payload: id };
-};
-
-export const getBookFromApi = async (dispatch) => {
-  try {
-    const request = new Request('https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/YtVxNHXODMWZgorpP7tK/books');
-    const response = await fetch(request);
-    const res = await response.json();
-
-    dispatch({
-      type: GET_BOOK_FROM_API,
-      payload: res,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const bookReducer = (state = [], action) => {
+const booksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD: return { ...state, [action.payload.id]: [{ author: action.payload.author, category: 'Fiction', title: action.payload.title }] };
-    case REMOVE: {
-      const key = action.payload;
-      const { [key]: value, ...newObj } = state;
-      return newObj;
-    }
-    case GET_BOOK_FROM_API: return action.payload;
-    default: return state;
+    case SAVE_BOOK:
+      return [...state, action.book];
+    case GET_BOOKS:
+      return action.books;
+    case REMOVE:
+      return state.filter((book) => book.id !== action.id);
+    default:
+      return state;
   }
 };
 
-export default bookReducer;
+export default booksReducer;
+
+export const removeBook = (id) => async (dispatch) => {
+  const bookDelete = await fetch(`${url}/${id}`, { method: 'DELETE' });
+  const response = await bookDelete.text();
+  if (response) {
+    dispatch({
+      type: REMOVE,
+      id,
+    });
+  }
+};
+
+export const saveBook = (book) => async (dispatch) => {
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: book.id,
+      title: book.title,
+      author: book.author,
+      category: 'underfined',
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
+  dispatch({
+    type: SAVE_BOOK,
+    book,
+  });
+};
+
+export const getBooks = () => async (dispatch) => {
+  const response = await fetch(url);
+  const json = await response.json();
+  const entries = Object.entries(json);
+  const books = entries.map((element) => ({
+    id: element[0],
+    title: Object.assign(...element[1]).title,
+    author: Object.assign(...element[1]).author,
+  }));
+
+  dispatch({
+    type: GET_BOOKS,
+    books,
+  });
+};

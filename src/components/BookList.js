@@ -1,21 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { Book } from './Book';
+import React from 'react';
+import Book from './Book';
 
-export class BookList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    const { books } = this.props;
-    return (
-      books.map((book) => <Book key={book.id} book={book} />)
-    );
-  }
-}
+const BookList = (props) => {
+  const { removeBook, books } = props;
+  return books.map((book) => (
+    <Book key={book.id} book={book} removeBook={removeBook} />
+  ));
+};
 
 BookList.propTypes = {
   books: PropTypes.instanceOf(Array).isRequired,

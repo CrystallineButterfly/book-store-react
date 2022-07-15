@@ -1,55 +1,19 @@
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-// } from 'react-router-dom';
-// import { Provider, useSelector } from 'react-redux';
-// import Bookss from './Components/Bookss';
-// import store from './Redux/configureStore';
-// import Navbar from './Components/Navbar';
-// import Catergories from './Components/Catergories';
-
-// function App() {
-//   const bookss = useSelector((state) => state.BookReducer);
-//   return (
-//     <Router className="route">
-//       <Navbar />
-//       <Provider store={store}>
-//         <Routes>
-//           <Route path="/" exact element={<Bookss books={bookss} />} />
-//           <Route path="/catergories" element={<Catergories />} />
-//         </Routes>
-//       </Provider>
-//     </Router>
-
-//   );
-// }
-
-// export default App;
-import { Routes, Route } from 'react-router-dom';
-import Container from './components/Container';
-import Form from './components/Form';
-import { Category } from './components/Category';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Bookstore from './components/Bookstore';
+import Categories from './components/Categories';
+import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
+      <Navbar />
       <Routes>
-        <Route>
-          <Route
-            path="/"
-            element={(
-              <div>
-                <Container />
-                <Form />
-              </div>
-            )}
-          />
-          <Route path="/Category" element={<Category />} />
-        </Route>
+        <Route exact path="/" element={<Bookstore />} />
+        <Route path="/books" element={<Bookstore />} />
+        <Route path="/category" element={<Categories />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
