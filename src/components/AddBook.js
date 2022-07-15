@@ -19,7 +19,7 @@ const AddBook = (props) => {
   };
   return (
     <div className="w-100 border-top mt-4 pt-4">
-      <h5 className="fw-bold text-secondary">ADD NEW BOOK</h5>
+      <h5 className="fw-bold text-secondary">ADD NEW BOOKS</h5>
       <form className="d-flex justify-content-between">
         <input
           className="w-50"
