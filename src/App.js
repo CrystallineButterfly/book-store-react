@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Bookstore />} />
         <Route path="/books" element={<Bookstore />} />
-        <Route path="/category" element={<Categories />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </BrowserRouter>
   );
